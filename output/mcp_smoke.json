@@ -1,6 +1,6 @@
 {
   "what": "Smoke test of the campus-customs MCP server, called by the vibe coder (Claude Code) through .mcp.json",
-  "vibe_coder": "Claude Code 2.1.288 (the vibe coder, not part of the agent team), headless: claude -p --mcp-config .mcp.json",
+  "vibe_coder": "Claude Code (the vibe coder, not part of the agent team), headless: claude -p --mcp-config .mcp.json",
   "server": "campus-customs: .venv/bin/python mcp_server/server.py (stdio)",
   "database": "data/campus_customs_new.db",
   "all_match": true,
@@ -148,5 +148,6 @@
         "mismatches": {}
       }
     }
-  ]
+  ],
+  "note": "Recorded in Problem 4, before the full run. The values matched data/campus_customs_new.db at that time (= the original data). The full run later paid invoice 501 and moved lease 1's next_due to 2026-10-02, so those two outputs now differ from the committed working copy; after a reset (README section 2) all three match again. Stock values (CC-HOOD-NAVY M: 8, $22/$58) still match."
 }

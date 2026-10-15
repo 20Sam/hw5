@@ -360,29 +360,26 @@ is left to a person. That $2,400 request is still pending so the approval can be
 
 ## 8. The full run (Problem 9)
 
-Reset the working copy (`POST /reset`, same as the board's Fresh start): all three tickets open,
-`cash_accounts.checking` = **$3,400.00**. Then each ticket was handed to the team from the board, in
-order 101 → 102 → 103, and a person approved the two payments on the board's approval tray.
+Graded run on the board, all agents on `gpt-6-luna`: **Fresh start** (reset) → `cash_accounts.checking` =
+**$3,400.00**; ticket 101 → approve invoice 501 → ticket 102 → approve the rent → ticket 103. The person at
+the board approved both payments.
 
 | Ticket | Final status | Agents who worked | Delegations | Human approvals | Cash |
 |---|---|---|---|---|---|
-| 101 Bulldog tee | `resolved` | boss, inventory, accounting, customer service | 4 | #1 $840 paid by Sam Hernandez | −$840.00 |
-| 102 Rent due | `resolved` | boss, facilities, accounting, customer service | 4 | #2 $2,400 paid by Sam Hernandez | −$2,400.00 |
+| 101 Bulldog tee | `resolved` | boss, inventory, accounting, customer service | 3 | #1 $840 paid by Sam Hernandez | −$840.00 |
+| 102 Rent due | `resolved` | boss, facilities, accounting, customer service | 3 | #2 $2,400 paid by Sam Hernandez | −$2,400.00 |
 | 103 Bulk hoodie discount | `resolved` | boss, inventory, accounting, customer service | 4 | none | $0.00 |
 
 **Cash:** $3,400.00 − $840.00 (invoice 501, ticket 101) − $2,400.00 (rent, ticket 102) − $0.00 (ticket 103)
-= **$160.00**, which is exactly `cash_accounts.checking` in the working copy afterwards. Ticket 103 spent
-nothing: the boss approved the 15% discount ($49.30 a hoodie) and deferred the 12-hoodie restock ($264.00
-at cost) because the vendor was on hold and only $160.00 was uncommitted.
+= **$160.00**, exactly `cash_accounts.checking` in the committed working copy.
 
-Run totals: 101 4 delegations / 59,545 tokens; 102 4 / 57,107; 103 4 / 67,424. Every model call was
-`gpt-5.6-luna`.
+Run ids: 101 `0c4fe070364e` (3 delegations, 63,512 tokens); 102 `6e520804b619` (3, 58,316); 103
+`42df7a2b3c2d` (4, 69,689). Earlier audit records are test runs, a first full run on the wrong model (see
+the model note in section 4), and three re-sends of ticket 101 after it was resolved; none moved money.
 
-**Files from the run**
-- `output/desk_tickets.html`: the Actual side of each ticket tab next to the plan, the Cash tab with the itemised money, and (Problem 10) the Reflection tab: grades per ticket, plan versus actual, when one agent would do, and what the team can and can't solve next.
-- `output/resolved_tickets.json`: per ticket the id, final status, outcome, each agent's contribution, delegations, requests, drafts, human approvals and the cash change.
-- `output/resolved_board.html`: one screenshot of the React board per resolved ticket (taken with headless Chrome at `?ticket=101/102/103` after the approvals).
-- `output/audit_trail.json`: the real runs appended after the earlier test runs (nothing wiped).
+**Files from the run:** `output/desk_tickets.html` (Actual, Cash and Reflection tabs),
+`output/resolved_tickets.json`, `output/resolved_board.html` (board screenshot per ticket),
+`output/audit_trail.json` (append-only).
 
 ---
 
