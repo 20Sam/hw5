@@ -1,0 +1,31 @@
+# Secrets: only .env.example goes to GitHub
+.env
+.env.*
+!.env.example
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# Frontend build and packages (npm install / npm run build recreate them)
+frontend/node_modules/
+frontend/dist/
+
+# Personal Claude Code settings (each person approves the MCP server for themselves)
+.claude/settings.local.json
+
+# SQLite side files and audit-trail temp files. Both databases themselves ARE committed:
+# data/campus_customs.db (original) and data/campus_customs_new.db (working copy after the full run).
+data/*.db-journal
+data/*.db-wal
+data/*.db-shm
+output/*.lock
+output/.audit_trail.*.tmp
+output/audit_trail.corrupt-*.json
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/
+*.log
